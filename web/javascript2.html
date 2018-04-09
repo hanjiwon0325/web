@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+  //배열
+  var member = ['han', 'jiwon', 96];
+  alert(member[0]);
+  alert(member[1]);
+  alert(member[2]);
+
+  function get_member(){
+    return ['han', 'jiwon', 96];
+  }
+  var member = get_member();
+  document.write(member[2] + "<br />");
+  document.write(member.length + "<br />");
+
+  //추가: .push, .concat, .unshift, .splice
+  //제거: .shift, .pop
+  //정렬: .sort, .reverse
+  var cha = ["a", "b" ,"c"];
+  document.write(cha.push("d") + "<br / >"); //4
+  document.write(cha.push("e") + "<br/>"); //5
+  document.write(cha + "<br />"); // a, b, c, d ,e
+
+  //객체
+  //인덱스로 문자를 가져오기 위해 dictionary를 사용
+  var grade = {};
+  grade["a"] = 10;
+  grade["b"] = 20;
+  grade["c"] = 30;
+  grade;
+
+  var grade = new Object();
+  grade["a"] = 10;
+  grade["b"] = 20;
+  grade["c"] = 30;
+  grade;
+
+  var grade = {"a": 1, "b": 2, "c": 3};
+  for (key in grade) {
+    document.write("key: " + key + ", value: " + grade[key] + "<br/>");
+  }
+
+  //<심화>
+  var grade = {
+    "dic1" : {"a":10, "b":20, "c":30},
+    "dic2" : function(){
+      for(var name in this.dic1){
+        document.write("list2_name: " + name +", list2_value: " + this.dic1[name] + "<br/>");
+      }
+    }
+  };
+  grade.dic2(); //'this.키값' 주의
+
+
+  </script>
+
+</body>
+</html>

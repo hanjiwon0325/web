@@ -1,0 +1,29 @@
+[JavaScript]
+
+- script 태그 (javascript와 html의 차이 알기)
+<h1>javascript</h1>
+<script>document.write(1+1);</script>
+<h1>html</h1>
+1+1
+
+- 이벤트(on속성)
+<input type="button" value="click" onclick="alert('click')">
+<input type="text" onchange="alert('changed')">
+<input type="text" onkeydown="alert('key down')">
+
+on~(on속성) = ~ 부분은  자바스크립트 속성이 들어가야 한다.
+
+- Console
+파일 만들지 않고도 자바스크립트 즉시 실행 가능하게 함
+웹페이지 창 오른쪽 키 > 검사(inspect) > Console
+ex) 콘솔창에 alert('문자열'.length) -> 해당 문자열의 문자수를 경고창으로 띄움
+즉 콘솔창에 코드를 넣어 실행시키면 실행결과가 바로 추출됨  
+ 
+- 자료형
+Boolean, Null, Number, String, undefined 등
+문자열 "" , '' => ""로 출력 
+
+'hello world'.toUpperCase()    => "HELLO WORLD"
+'hello world'.length           => 11
+'hello world'.indexOf('o')     => 4 
+'hello world'.indexOf('world') => 6 

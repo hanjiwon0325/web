@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- 객체지향 프로그래밍 -->
+<body>
+  <script>
+    //객체 = 속성(변수) + 메소드(함수)
+    //객체지향: 상태와 행위로 이루어진 객체를 만드는 것
+    //1.부품화       : 메소드와 연관된 변수들을 분류하고 그룹핑하는 작업, 그렇게 그룹핑된 것이 '객체'이다.
+    //2.은닉화,캡슐화: 동작방법은 숨기고 사용방법만 드러내는 것
+    //3.인터페이스   : 정해진 약속에 따라 연결하는 연결점
+    //4.상속,복제    :
+
+
+   //객체 생성
+   //case1
+    var person = {}
+    person.name = 'egoing';
+    person.introduce = function(){
+      return 'My name is '+ this.name;
+    }
+    //person = {"name" : "egoing", "introduce":"My name is fofo"}
+    document.write(person.introduce());
+
+   //case2
+    var person = {
+      'name' : 'egoing',
+      'introduce' : function(){
+        return 'My name is '+ this.name;
+      }
+    }
+    //person = {"name" : "egoing", "introduce":"My name is fofo"}
+    document.write(person.introduce());
+
+
+   //생성자 (new 함수())
+   //보통의 객체지향언어는 class소속이나 자바스크립트는 함수가 주체이다.
+   //case1
+   function Person(){}    //함수 생성
+
+   var p1 = new Person(); //생성자1
+   p1.name = 'egoing';
+   p1.introduce = function(){
+       return 'My name is '+ this.name;
+   }
+   document.write(p1.introduce() + "<br />");
+
+   var p2 = new Person(); //생성자2
+   p2.name = 'leezche';
+   p2.introduce = function(){
+       return 'My name is '+ this.name;
+   }
+   document.write(p2.introduce());
+
+   //case2(개선된 방법)
+   function Person(name){
+     this.name = name;
+     this.introduce = function(){
+          return 'My name is '+ this.name;
+        }
+    }
+
+   var p1 = new Person('egoing'); //생성자1
+   document.write(p1.introduce() + "<br />");
+
+   var p2 = new Person('leezche'); //생성자2
+   document.write(p2.introduce());
+
+
+  //전역객체 (window)
+  var o = {'func':function(){
+    alert('Hello?');
+  }}
+  o.func();        //Hello?
+  window.o.func(); //전역객체 (Hello?)
+  //cf) node.js에서는 global이 전역객체이다.
+
+
+  //this
+  //함수 호출 맥락을 의미 -> 호출 방식에 따라 가리키는 대상이 달라짐
+  function func(){
+    if(window === this){
+        document.write("window === this");
+      }
+  }
+  func(); //window === this
+
+  // 객체 소속인 메소드 안에 있는 this
+  //case1
+  var o = {
+    func : function(){
+        if(o === this){ //객체 소속인 메소드 안에 있는 this는 그 객체(o)를 가리킴
+            document.write("o === this");
+            }
+        }
+    }
+    o.func(); // o === this
+
+    //case2 : apply()
+    var o = {}
+    var p = {}
+    function func(){
+      switch(this){
+          case o:
+              document.write('o<br />');
+              break;
+          case p:
+              document.write('p<br />');
+              break;
+          case window:
+              document.write('window<br />');
+              break;
+        }
+    }
+    func();        //window
+    func.apply(o); //o
+    func.apply(p); //p
+
+    //생성자와 this
+    var funcThis = null;
+
+     function Func(){
+        funcThis = this;
+    }
+
+    var o1 = Func();
+    if(funcThis === window){ //여기서 this랑 window는 같음
+        document.write('window <br />'); // window 출력
+    }
+
+    var o2 = new Func(); //생성자를 만들면 this는 생성자로부터 만들어진 객체(o2)를 가리킴
+    if(funcThis === o2){
+        document.write('o2 <br />'); //o2 출력
+    }
+
+
+    //상속
+    //prototype에 저장된 함수들은 생성자를 통해 객체가 만들어질 때 그 객체에 연결
+    //case1
+    function Person(name){ //Person 메소드
+      this.name = name;
+    }
+    Person.prototype.name = null;
+    Person.prototype.introduce = function(){
+        return 'My name is '+ this.name;
+    }
+
+    function Programmer(name){ // Programmer 메소드
+        this.name = name;
+    }
+    Programmer.prototype = new Person();      //상속 -> Person 함수 기능 그대로 사용가능(.name, .introduce)
+
+    Programmer.prototype.coding = function(){ //Person()에 없는 추가적인 기능 (.coding)
+        return "hello world";
+    }
+
+    var p1 = new Programmer('egoing');         //생성자 객체 생성
+    document.write(p1.introduce() + "<br />"); //Person()에 있는 기능 상속 받아 사용
+    document.write(p1.coding() + "<br />");    //Programmer()에만 있는 기능 사용
+
+    //case2
+    function Ultra(){}
+    Ultra.prototype.ultraProp = true;
+
+    function Super(){}
+    Super.prototype = new Ultra(); //상속
+
+    function Sub(){}
+    Sub.prototype = new Super();  //상속
+
+    var o = new Sub();            //생성자 객체 생성
+    console.log(o.ultraProp);     //true
+
+
+    //object 객체
+    Object.prototype.contain = function(neddle) {
+    for(var name in this){
+        if(this[name] === neddle){
+            return true;
+            }
+        }
+      return false;
+    }
+    var o = {'name':'egoing', 'city':'seoul'}
+    console.log(o.contain('egoing'));   //true
+    var a = ['egoing','leezche','grapittie'];
+    console.log(a.contain('leezche'));  //true
+
+    for(var name in o){
+    if(o.hasOwnProperty(name))
+    //인자로 전달된 속성의 이름이 객체의 속성인지 검사
+    //hasOwnProperty()가 없으면 contain도 출력됨
+    //false: prototype으로 상속받은 객체일 때
+        console.log(name);    //name, city (true이기 때문)
+    }
+
+
+    //데이터 타입
+    //원시데이터타입과 객체로 나눌 수 있다.
+    //원시데이터타입: String, number, Boolean, Null, undefined
+    //래퍼객체: 원시데이터타입을 객체처럼 다룰 수 있도록 하는 객체 (Sting, Number, Boolean)
+
+    //참조
+    //객체 = 참조자료형
+    //case1
+    var a = {'id':1};
+    function func(b){
+        b = {'id':2};
+    }
+    func(a);
+    console.log(a.id);  // 1
+
+    //case2
+    var a = {'id':1};
+    function func(b){
+        b.id = 2; //b는 객체 a의 레퍼런스(참조), 값의 속성을 바꾸는 작업이므로 a에 영향을 줌
+    }
+    func(a);
+    console.log(a.id);  // 2
+
+  </script>
+</body>
+</html>

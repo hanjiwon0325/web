@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  //정규표현식
+  //console.log(객체명.exec("문자열") | ..test("문자열"))
+  //console.log("문자열".match(객체명)| "문자열".replace(객체명))
+  var pattern = new RegExp('a');
+  console.log(pattern.exec('abcdef')); //["a"]
+  console.log(pattern.exec('bcdefg')); //null
+  console.log(pattern.test('abcde'));  //true
+  console.log('abcde'.match(pattern)); //["a"]
+  console.log('abcde'.replace(pattern, "A")); //Abcde
+
+  //정규표현식 옵션
+  // i : 대소문
+  //
+
+
+  </script>
+</body>
+</html>

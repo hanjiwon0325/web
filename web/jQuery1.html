@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- jQuery를 위해 추가할 사항 -->
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+
+<body>
+    <ul id="lists">
+        <li>empty</li>
+        <li>empty</li>
+        <li>empty</li>
+        <li>empty</li>
+    </ul>
+
+    <input id="execute_btn" type="button" value="execute" />
+
+    <script type="text/javascript">
+    //태그: 그냥 쓰기
+    //id : #id명
+    //class : .class명
+     $('#execute_btn').click(function(){
+        $('#lists li').text('changed');
+     });
+    </script>
+
+</body>
+</html>
